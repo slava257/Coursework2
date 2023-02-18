@@ -1,21 +1,28 @@
 package Task1;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
+import java.util.Scanner;
 
-public abstract class Task    {
+import static Task1.Main.LOCAL_DATE;
+
+public abstract class Task implements Comparable<Task> {
+    private int counter = 0;
     private int idGenerator;
     private String title;
     private Type type;
     private int id;
     private LocalDateTime dateTime;
     private String description;
+    private Repeatability repeatability;
 
-    public Task(int idGenerator, String title, Type type, int id, LocalDateTime dateTime, String description) {
-        this.idGenerator = idGenerator;
+    public Task(String title, Type type, LocalDateTime dateTime, String description) {
+
         this.title = title;
         this.type = type;
-        this.id = this.id;
+        this.id = counter++;
         this.dateTime = dateTime;
         this.description = description;
     }
@@ -49,6 +56,9 @@ public abstract class Task    {
         this.description = description;
     }
 
+    public abstract Repeatability getRepeatability();
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -62,19 +72,18 @@ public abstract class Task    {
         return Objects.hash(idGenerator, title, type, id, dateTime, description);
     }
 
-    public abstract boolean appearsLn(LocalDateTime dateTime);
+    public abstract boolean appearsLn(LocalDate localDate);
+
+    @Override
+    public int compareTo(Task otherTask) {
+        if (otherTask == null) {
+            return 1;
+        }
+        return this.dateTime.toLocalDate().compareTo(otherTask.dateTime.toLocalDate());
+    }
 
     @Override
     public String toString() {
-        return "Task{" +
-                "idGenerator=" + idGenerator +
-                ", title='" + title + '\'' +
-                ", type=" + type +
-                ", id=" + id +
-                ", dateTime=" + dateTime +
-                ", description='" + description + '\'' +
-                '}';
+        return "Task{" + "idGenerator=" + idGenerator + ", title='" + title + '\'' + ", type=" + type + ", id=" + id + ", dateTime=" + dateTime + ", description='" + description + '\'' + '}';
     }
-
-
 }
