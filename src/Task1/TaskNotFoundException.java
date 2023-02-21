@@ -1,4 +1,4 @@
 package Task1;
 
-public interface TaskNotFoundException {
+public class TaskNotFoundException extends Throwable {
 }

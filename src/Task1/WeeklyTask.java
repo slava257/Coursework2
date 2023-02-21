@@ -1,14 +1,21 @@
 package Task1;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class WeeklyTask extends Task {
-    public WeeklyTask(int idGenerator, String title, Type type, int id, LocalDateTime dateTime, String description) {
-        super(idGenerator, title, type, id, dateTime, description);
+    public WeeklyTask(String title, Type type, LocalDateTime dateTime, String description) {
+        super(title, type, dateTime, description);
     }
 
     @Override
-    public boolean appearsLn(LocalDateTime dateTime) {
-        return false;
+    public boolean appearsLn(LocalDate localDate) {
+        LocalDate taskDate = this.getDateTime().toLocalDate();
+        return localDate.equals(taskDate) || localDate.isAfter(taskDate) && localDate.getDayOfWeek().equals(localDate.getDayOfWeek());
+    }
+
+    @Override
+    public Repeatability getRepeatability() {
+        return Repeatability.WEEKLY;
     }
 }
