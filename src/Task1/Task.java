@@ -9,7 +9,7 @@ import java.util.Scanner;
 import static Task1.Main.LOCAL_DATE;
 
 public abstract class Task implements Comparable<Task> {
-    private int counter = 0;
+    private static int counter = 0;
     private int idGenerator;
     private String title;
     private Type type;

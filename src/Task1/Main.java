@@ -122,6 +122,7 @@ public class Main {
             }
         }
     }
+
     private static Repeatability exceptionRepeatability(Scanner scanner) {
         while (true) {
             try {
@@ -214,8 +215,5 @@ public class Main {
                 default -> throw new IllegalArgumentException("пока");
             }
         }
-    }
-
-    private static class TaskNotFoundException extends Throwable {
     }
 }
